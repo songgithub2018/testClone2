@@ -1,0 +1,24 @@
+server:
+  port: 7002 #服务端口
+spring:
+  application:
+    name: rabbitmq-consumer #指定服务名
+  rabbitmq:
+    addresses: 127.0.0.1
+    username: guest
+    password: guest
+  cloud:
+    stream:
+      instanceCount: 2
+      instanceIndex: 1
+      bindings:
+        input:
+          destination: itcast-default
+        myinput:
+          destination: itcast-custom-default
+          group: group1
+          consumer:
+            partitioned: true
+      binders:
+        defaultRabbit:
+          type: rabbit
